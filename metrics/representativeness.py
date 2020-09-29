@@ -10,14 +10,15 @@ from scipy.spatial.distance import jensenshannon
 from statsmodels.distributions.empirical_distribution import ECDF
 from sklearn.metrics.pairwise import pairwise_kernels
 
-def bootstrap(stat_value, data, statistic, iters=100):
+def bootstrap(stat_value, data, statistic, iters=100, size_split=0.5):
     pvalue = 0
     for i in range(iters):
-        train, test = train_test_split(data, test_size=0.33, random_state = i)
+        data_res = resample(data, random_state=i)
+        train, test = train_test_split(data_res, train_size=size_split, random_state = i)
         stat = statistic(train,test)
         if  stat >= stat_value:
             pvalue += 1
-    return pvalue/100
+    return pvalue/iters
 
 def mmd(X_train, X_test, kernel='sigmoid'):
     intra = np.sum(pairwise_kernels(X_train, X_train, metric=kernel))
@@ -52,3 +53,18 @@ def phi_js(X_train, X_test):
 
 def phi_mmd(X_train, X_test):
     return phi(X_train, X_test, mmd, reshape=False)
+
+
+def call_phi(X_a, X_b, iters= 100, statistic='ks'):
+    if statistic == 'js':
+        statistic = phi_js
+    elif statistic == 'mmd':
+        statistic = phi_mmd
+    else:
+        statistic = phi_ks
+    if X_a.shape[0] < X_b.shape[0]:
+        X_temp = X_a
+        X_a = X_b
+        X_b = X_temp
+    X_tot = np.concatenate((X_a, X_b), axis=0)
+    return bootstrap(phi_ks(X_a, X_b), X_tot, statistic, iters, size_split=X_a.shape[0])
