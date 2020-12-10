@@ -33,4 +33,4 @@ def sigma(real, preds, thresh):
         res = 1 if res > 1 else (0 if res < 0 else res)
         return res
     
-    return [sigma_helper(real[i], preds[i], thresh) for i in range(len(real))]
+    return np.array([sigma_helper(real[i], preds[i], thresh) for i in range(len(real))])
