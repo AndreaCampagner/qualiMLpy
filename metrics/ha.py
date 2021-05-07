@@ -17,7 +17,7 @@ def ha(y_true, y_pred, t = 0.5, weights = None, diffs = None):
     
     for c in classes:
         idx = np.argwhere(real == c).flatten()
-        c_spec = np.sum(sigma_2(real[idx], preds[idx,:], t)*d[idx])/np.sum(d[idx])
+        c_spec = np.sum(sigma(real[idx], preds[idx,:], t)*d[idx])/np.sum(d[idx])
         res += c_spec*w[c]
     return res
 
@@ -33,4 +33,4 @@ def sigma(real, preds, thresh):
         res = 1 if res > 1 else (0 if res < 0 else res)
         return res
     
-    return [sigma_helper(real[i], preds[i], thresh) for i in range(len(real))]
+    return np.array([sigma_helper(real[i], preds[i], thresh) for i in range(len(real))])
