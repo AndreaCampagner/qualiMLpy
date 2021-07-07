@@ -2,7 +2,7 @@ import matplotlib.pyplot as plt
 import scipy.stats as stats
 import numpy as np
 
-def plot_step_one(similarities, metrics, scatter=False, ratio=None, rho=None):
+def plot_step_one(similarities, metrics, scatter=True):
 
   fig, axs = plt.subplots(2, figsize=(10,10))
   fig.subplots_adjust(hspace=0)
