@@ -24,7 +24,7 @@ You can find more information on most of these metrics and code in various artic
 
 * Meta-validation Methodology plots (step_one.py + step_two.py)
 
-    * Cabitza, F., Campagner, A., Soares, F., de Guardiana Romualdo, L. G., Challa, F., Sulejmani, A., Seghezzi, M., Carobene, A. (2021). The Importance of Being External. Lessons learnt from the external validation of a machine learning model for COVID-19 diagnosis across 3 continents. Computer Methods and Programs in Biomedicine (Submitted)
+    * Cabitza, F., Campagner, A., Soares, F., de Guardiana Romualdo, L. G., Challa, F., Sulejmani, A., Seghezzi, M., Carobene, A. (2021). The Importance of Being External. Lessons learnt from the external validation of a machine learning model for COVID-19 diagnosis across 3 continents. Computer Methods and Programs in Biomedicine (Accepted)
 
 In this repository you can also find some general utilities that are not directly authored by me (or anyone @ MUDI lab), for which we
 provide a easy-to-use Python implementation (mostly compatible with the Python data science stack). For more info, please refer to the
