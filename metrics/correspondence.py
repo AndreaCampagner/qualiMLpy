@@ -18,23 +18,23 @@ def psi_similarity_test(X_a, X_b, metric='euclidean', iters=100):
   pval = 0.0
   X_tot = np.concatenate((X_a, X_b), axis=0)
   for i in range(iters):
-    X_a_temp, X_b_temp = train_test_split(X_tot, train_size=len(X_a)/len(X_tot), random_state = i)
+    X_a_temp, X_b_temp = train_test_split(X_tot, train_size=len(X_a)/len(X_tot))
     stat_temp = psi_similarity_helper(X_a_temp, X_b_temp, metric)
     if stat <= stat_temp:
       pval += 1.0
   return pval/iters
 
 def psi_similarity_helper(X_a, X_b, metric='euclidean'):
-  intra = np.sum(pairwise_distances(X_a, X_a, metric=metric))
+  #intra = np.sum(pairwise_distances(X_a, X_a, metric=metric))
   nn = NearestNeighbors()
   nn.fit(X_a)
 
   stat = 0
   for x in X_b:
     idx = nn.kneighbors([x], 1, return_distance=False)
-    temp = intra - np.sum(pairwise_distances(X_a, X_a[idx][0], metric=metric))
+    temp -= np.sum(pairwise_distances(X_a, X_a[idx][0], metric=metric))
     temp += np.sum(pairwise_distances(X_a, [x], metric=metric))
-    stat += temp - intra
+    stat += temp
   stat /= len(X_b)
   return stat
 
