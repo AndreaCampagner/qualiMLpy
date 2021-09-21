@@ -32,6 +32,7 @@ def psi_similarity_helper(X_a, X_b, metric='euclidean'):
   stat = 0
   for x in X_b:
     idx = nn.kneighbors([x], 1, return_distance=False)
+    temp = 0
     temp -= np.sum(pairwise_distances(X_a, X_a[idx][0], metric=metric))
     temp += np.sum(pairwise_distances(X_a, [x], metric=metric))
     stat += temp
