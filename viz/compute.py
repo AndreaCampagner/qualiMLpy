@@ -29,7 +29,7 @@ def nb(y_true, y_proba, th=0.5):
 
 def mss_auc(auc, prop, target_se = 0.0255):
   for n in range(10, 1000000):
-    se = np.sqrt(auc*(1-auc)*(1 + (n/2 - 1)*(1 - auc)/(2- auc) + (n/2 -1)*auc/(1+auc))/(n**2*prop*(1-prop)))
+    se = np.sqrt(auc*(1-auc)*(1 + (n/2 - 1)*(1 - auc)/(2- auc) + (n/2 -1)/(1+auc))/(n**2*prop*(1-prop)))
     if se <= target_se:
       return n
 
