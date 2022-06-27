@@ -46,7 +46,7 @@ def irr(preds, confs0=None, accs0=None, cohers0=None):
             # If only one annotator is present, disagreement is zero but his/her
             # accuracy and confidence should be incorporated anyway
             den = 1
-            count_min = float(accs) * float(confs)
+            count_min = float(accs)
             count_max = count_min
 
         count_min /= den
